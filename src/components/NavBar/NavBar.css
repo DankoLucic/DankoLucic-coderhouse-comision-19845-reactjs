@@ -1,0 +1,45 @@
+
+.bodyNavBar{
+    margin: 0px;
+    padding: 0px;
+}
+.backgroundNavBar{
+    background-color: beige;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    
+}
+
+
+.textNavBar{
+    font-family: Helvetica;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+
+}
+
+.textItemsNavBar{
+    font-family: Helvetica;
+    font-size: 20px;
+    
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+.textItemsNavBar a{
+    text-decoration: none;
+    list-style: none;
+}
+
+.textItemsNavBar a li{
+    padding: 5px;
+}
+

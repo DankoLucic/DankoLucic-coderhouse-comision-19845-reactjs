@@ -1,0 +1,15 @@
+.text-label{
+    font-size: 30px;
+}
+
+.btn-size{
+    width: 90px;
+    height: 40px;
+}
+
+.div-border{
+    border-style: solid;
+    border-width: 1px;
+    width:fit-content;
+    border-radius: 7px;
+}

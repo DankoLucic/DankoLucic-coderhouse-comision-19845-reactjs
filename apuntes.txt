@@ -1,11 +1,11 @@
-Instalar react y crear aplicación con NPM
+Install React
+    
+        Instalar react y crear aplicación con NPM
+            instalar react: npm install -g create-react-app
+            Crear aplicación: create-react-app nombre-de-app
 
-    instalar react: npm install -g create-react-app
-    Crear aplicación: create-react-app nombre-de-app
-
-Instalar react y crear aplicación con NPX (todo en uno)
-
-    npx create-react-app nombre-de-app
+        Instalar react y crear aplicación con NPX (todo en uno)
+            npx create-react-app nombre-de-app
 
 Git
 
@@ -22,7 +22,25 @@ Git
             git push -u origin main
 
         Subir archivos (no por primera vez)
-            git remote add origin https://github.com/DankoLucic/DankoLucic-coderhouse-comision-19845-reactjs.git
-            git branch -M main
+            git add .
+            git commit -m "second commit"
             git push -u origin main
+
+Install Bootstrap
+
+    NPN
+        npm install react-bootstrap bootstrap
+
+    Import Apps
+        En Apps.jsx se debe importar:
+            import 'bootstrap/dist/css/bootstrap.min.css';
+            
+    Import Component
+        Cada componente que utilicemos que venga de bootstrap hay que importarlo en el componente (hoja) en la cual estemos, por ejemplo:
+            import Navbar from 'react-bootstrap/Navbar'
+            import Container from 'react-bootstrap/Container';   
+    
+
+
+
 
