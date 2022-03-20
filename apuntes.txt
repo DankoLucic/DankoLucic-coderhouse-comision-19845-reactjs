@@ -1,0 +1,28 @@
+Instalar react y crear aplicación con NPM
+
+    instalar react: npm install -g create-react-app
+    Crear aplicación: create-react-app nombre-de-app
+
+Instalar react y crear aplicación con NPX (todo en uno)
+
+    npx create-react-app nombre-de-app
+
+Git
+
+    Primera vez.
+
+        Crear repositorio directo en GitHub.
+
+        Subir archivos (por primera vez) al repositorio recien creado.  
+            git init
+            git add .
+            git commit -m "first commit"
+            git branch -M main
+            git remote add origin https://github.com/DankoLucic/DankoLucic-coderhouse-comision-19845-reactjs.git
+            git push -u origin main
+
+        Subir archivos (no por primera vez)
+            git remote add origin https://github.com/DankoLucic/DankoLucic-coderhouse-comision-19845-reactjs.git
+            git branch -M main
+            git push -u origin main
+
