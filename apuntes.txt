@@ -34,13 +34,15 @@ Install Bootstrap
     Import Apps
         En Apps.jsx se debe importar:
             import 'bootstrap/dist/css/bootstrap.min.css';
-            
+
     Import Component
         Cada componente que utilicemos que venga de bootstrap hay que importarlo en el componente (hoja) en la cual estemos, por ejemplo:
             import Navbar from 'react-bootstrap/Navbar'
             import Container from 'react-bootstrap/Container';   
     
+Atajos React
 
+    si colocas rf te aparecen opciones de autocompletado de componentes (react function x ejemplo)
 
 
 
