@@ -1,6 +1,9 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import ItemDetailContainer from '../ItemDetailContainer/ItemDetailContainer';
+import { funcionDetail } from '../ItemDetailContainer/ItemDetailContainer';
+import { Link } from 'react-router-dom';
 
 
 function Item({prop1}) {
@@ -13,7 +16,12 @@ function Item({prop1}) {
                 <Card.Text>
                     Nombre Producto: {prop1.nombre}
                 </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <Button 
+                // {<ItemDetailContainer propId = {propId}/>} //funcion para llamar a la funcióm Details
+                variant="primary">
+                  Detalle Producto
+                </Button>
+                
             </Card.Body>
         </Card>
     </div>
