@@ -44,5 +44,18 @@ Atajos React
 
     si colocas rf te aparecen opciones de autocompletado de componentes (react function x ejemplo)
 
+Routing y Navegación
+
+    Se debe intalar las dependencias de routing
+        npm install  react-router-dom
+    Una vez instalado, importaremos el módulo desde react-router-dom:
+        import {BrowserRouter, Routes, Route} from 'react-router-dom';
+    <BrowserRouter> </BrowserRouter>  
+        Dentro de esta etiqueta debe estar el enrutado
+    <Routes> </Routes>
+        Dentro deben estar a las componentes que requerimos navegar, que sean una sección aparte por ejemplo Navbar
+    <Route> </Route>
+        Dentro se especifican los elementos que requieren una ruta especifica, propiedades path y element.
+        Ej: path="/" y element= {<Componente>}
 
 

@@ -2,90 +2,87 @@ import React from 'react';
 import './ItemListContainer.css';
 import { useEffect, useState } from 'react';
 import ItemList from '../ItemList/ItemList';
-
+import { Spinner } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
 
 function ItemListContainer({saludo}) {
 
-   const [productos, setProductos] = useState([]);
+   const [dataObjeto, setdataObjeto] = useState([]);
    const [loading, setLoading] = useState(true);
-   const URL = "https://run.mocky.io/v3/0e8bb036-d20e-49ab-bb14-262710a5c64f";
+   const {categoriaId} = useParams(); 
 
-    // const task = new Promise((resolve, reject)=>{
-    //     let condition = true;
-    //     if (condition) {
-    //         setTimeout(() => {
-    //             resolve(prod)
-    //         }, 3000);
-    //     }
-    //     else{
-    //         reject("400 not found");
-    //     }
-    // });
+
+
+   const URL = "https://run.mocky.io/v3/8437cdef-a302-487a-a03f-4605ad5a27c8";
+
+   
 
     useEffect(() => {
 
-        // task
-        // .then(resp => {
-        //     setProductos(resp);
-        // }).catch(err => {
-        //     console.log(err);
-        // }).finally(()=>{
-        //     setLoading(false);
-        // })
-
-        fetch(URL, {
-            method: 'GET', 
-            headers:{
-                "Content-Type": "application/json"
-                // "Content-Type": "multipart/form-data"
-            }
-        }).then(response => {
-            if (response.ok){
-                return response.json();
-            }
-            // else{
-            //     throw new Error(response.status);
-            // }
-        }).then(data => {
-            setProductos(data);
-            console.log(data);
-        }).catch(err => {
-            console.error("ERROR: ", err.message);  
-        }).finally(()=> {
-            setLoading(false);
-            console.log("finally")
-        });
         
-    }, [])
+
+        setTimeout(function(){
+
+            if(categoriaId){
+                console.log(categoriaId)
+                fetch(URL, {
+                    method: 'GET', 
+                    headers:{
+                        "Content-Type": "application/json"
+                    }
+                }).then(response => {
+                    return response.json();
+                }).then(resp => {
+                    console.log((resp.products[1]).category);
+                    setdataObjeto((resp.products).filter((item) => item.category = categoriaId));
+                    console.log(dataObjeto);
+                }).catch(err => {
+                    console.error("ERROR: ", err.message);  
+                }).finally(()=> {
+                    setLoading(false);
+                });
+
+            }
+            else{
+
+                fetch(URL, {
+                    method: 'GET', 
+                    headers:{
+                        "Content-Type": "application/json"
+                    }
+                }).then(response => {
+                    return response.json();
+                }).then(data => {
+                    setdataObjeto(data);
+                }).catch(err => {
+                    console.error("ERROR: ", err.message);  
+                }).finally(()=> {
+                    setLoading(false);
+                });
+
+            }
+
+        }, 2000);
+
+
+    }, [categoriaId])
     
 
-    return (
+    return(
 
-        <div>
-            <div className="background-item-list">
-
-                <div className="text-item-list d-flex p-4 justify-content-center">
-                    <h3 className="text-item-list">
-                        {saludo}
-                    </h3>
-                </div> 
-
-                <div className="d-flex justify-content-center">
-                    {loading 
-                        ? 
-                            <div className="spinner-grow text-light m-2" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </div> 
-                        :
-                            <div className="d-flex justify-content-center m-1">
-                                <ItemList productos = {productos}/>
-                            </div> 
-                    } 
-                </div>
-            </div>
-        </div>
+        <>
+            <div className="d-flex justify-content-center m-1">
+                {loading 
+                    ? 
+                        <Spinner animation="grow" />
+                    :
+                        <ItemList productosObjeto = {dataObjeto.products}/>
+                } 
+            </div> 
+        </>
     )
+
   }
 
   export default ItemListContainer;

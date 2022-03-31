@@ -3,6 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import CartWidget from '../CartWidget/CartWidget';
+import { NavLink } from 'react-router-dom';
 
 
 function NavBar() {
@@ -15,9 +16,15 @@ function NavBar() {
             <Container>
               <Navbar.Brand href="#home">Universidad de los Andes</Navbar.Brand>
               <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#features">Features</Nav.Link>
-                <Nav.Link href="#pricing">Pricing</Nav.Link>
+              <NavLink to="/" className="m-2">
+                  Home
+                </NavLink>
+                <NavLink to="/cart" className="m-2">
+                  Cart
+                </NavLink>
+                <NavLink to="categoria/accesorio" className="m-2">
+                  Accesorios
+                </NavLink>
               </Nav>
             <CartWidget/>
             </Container>
@@ -63,7 +70,7 @@ function NavBar() {
         </nav> */}
 
 
-          
+
 
       </div>
 

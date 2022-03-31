@@ -1,13 +1,13 @@
 import React from 'react'
 import Item from '../Item/Item'
 
-function ItemList({productos}) {
+function ItemList({productosObjeto}) {
   return (
     <>
-        {productos.map((producto)=> 
+        {productosObjeto.map((productoObjeto)=> 
             <Item 
-                key = {producto.id}
-                prop1 = {producto}
+                key = {productoObjeto.id}
+                productoObjeto = {productoObjeto}
             />
         )}
     </>

@@ -1,28 +1,33 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import ItemDetailContainer from '../ItemDetailContainer/ItemDetailContainer';
-import { funcionDetail } from '../ItemDetailContainer/ItemDetailContainer';
 import { Link } from 'react-router-dom';
+import ListGroup from 'react-bootstrap/ListGroup';
+import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
 
-function Item({prop1}) {
+function Item({productoObjeto}) {
   return (
     <div className="p-2">
-        <Card style={{ width: '18rem' }}>
-            {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+        <Card style={{ width: '18rem'  }}>
+            <Card.Img variant="top" src={productoObjeto.image} />
             <Card.Body>
-                <Card.Title>Producto Nº: {prop1.id}</Card.Title>
-                <Card.Text>
-                    Nombre Producto: {prop1.nombre}
-                </Card.Text>
-                <Button 
-                // {<ItemDetailContainer propId = {propId}/>} //funcion para llamar a la funcióm Details
-                variant="primary">
-                  Detalle Producto
-                </Button>
-                
+                <Card.Title>{productoObjeto.name}</Card.Title>
             </Card.Body>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem>ID: {productoObjeto.id}</ListGroupItem>
+              <ListGroupItem>Category: {productoObjeto.category}</ListGroupItem>
+              <ListGroupItem>Price: {productoObjeto.price}</ListGroupItem>
+          </ListGroup>
+          <Card.Body>
+            <Link to={`/detalle/${productoObjeto.id}`}>
+                <Button 
+                  variant="primary">
+                    Details
+                </Button>
+            </Link>
+          </Card.Body>
+
         </Card>
     </div>
   )

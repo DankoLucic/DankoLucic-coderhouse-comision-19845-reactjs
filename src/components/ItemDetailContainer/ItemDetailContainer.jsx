@@ -1,67 +1,73 @@
 import React from 'react'
 import ItemDetail from '../ItemDetail/ItemDetail';
 import { useEffect, useState } from 'react';
-import SecondPage from '../../container/SecondPage';
+import { useParams } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 
 //en item detailcontainer, con un producto y su id, genero una promise (con loading) para despues llamar a Item Detail
 
 function ItemDetailContainer() {
 
-    
 
-    const [propId, setProductos] = useState([]);
+   const [producto, setProductos] = useState();
    const [loading, setLoading] = useState(true);
+   const {detalleId} = useParams(); 
 
+   const URL = "https://run.mocky.io/v3/8437cdef-a302-487a-a03f-4605ad5a27c8";
 
-    const task = new Promise((resolve, reject)=>{
-        let condition = true;
-        if (condition) {
-            setTimeout(() => {
-                resolve(propId)
-            }, 3000);
-        }
-        else{
-            reject("400 not found");
-        }
-    });
-
- 
-
-
-
-    useEffect(() => {
-
-              task
-        .then(resp => {
-            // setProductos(resp);
+   useEffect(() => {
+        fetch(URL, {
+            method: 'GET', 
+            headers:{
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+        return response.json();
+        }).then(resp => {
+            setProductos((resp.products).find((item) => item.id === detalleId));
         }).catch(err => {
-            console.log(err);
-        }).finally(()=>{
-            setLoading(false);
-        })
+        console.error("ERROR: ", err.message);  
+        }).finally(()=> {
+        setLoading(false);
+        });
 
+})
 
-    })
+    // const task = new Promise((resolve, reject)=>{
+    //     let condition = true;
+    //     if (condition) {
+    //         setTimeout(() => { 
+    //             resolve(detalleId);
+    //         },2000);
+    //     }
+    //     else{
+    //         reject("400 not found");
+    //     }
+    // });
+
+    // useEffect(() => {
+
+    //         task
+    //         .then(resp => {
+    //             setProductos(resp);
+    //         }).catch(err => {
+    //             console.log(err);
+    //         }).finally(()=>{
+    //             setLoading(false);
+    //         });    
+
+    // },[])
 
      
-
   return (
-    <div className="background-item-list">
-        <div className="d-flex justify-content-center">
-            {loading 
-                ? 
-                    <div className="spinner-grow text-light m-2" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                    </div> 
-                :
-                    <div className="d-flex justify-content-center m-1">
-                        <ItemDetail propId= {propId}/>
-                    </div> 
-            } 
-        </div>
-    </div>
-
-
+    <>
+        {loading
+            ? 
+                <Spinner animation="grow" />
+            :
+                <ItemDetail producto = {producto.products}/>           
+        }  
+    </>
   )
 }
 
