@@ -36,7 +36,7 @@ function ItemListContainer() {
                 }).then(resp => {
                     // console.log((resp.products[1]).category);
                     setDataObjeto((resp.products).filter((item) => item.category = categoriaId));
-                    console.log((resp.products));
+                    console.log(dataObjeto);
                 }).catch(err => {
                     console.error("ERROR: ", err.message);  
                 }).finally(()=> {
@@ -54,7 +54,7 @@ function ItemListContainer() {
                 }).then(response => {
                     return response.json();
                 }).then(data => {
-                    setDataObjeto(data);
+                    setDataObjeto(data.products);
                 }).catch(err => {
                     console.error("ERROR: ", err.message);  
                 }).finally(()=> {
