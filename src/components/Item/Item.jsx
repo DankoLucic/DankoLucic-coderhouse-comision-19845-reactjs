@@ -18,14 +18,17 @@ function Item({productoObjeto}) {
               <ListGroupItem>ID: {productoObjeto.id}</ListGroupItem>
               <ListGroupItem>Category: {productoObjeto.category}</ListGroupItem>
               <ListGroupItem>Price: {productoObjeto.price}</ListGroupItem>
+              <ListGroupItem>Stock: {productoObjeto.stock}</ListGroupItem>
           </ListGroup>
           <Card.Body>
-            <Link to={`/detalle/${productoObjeto.id}`}>
-                <Button 
-                  variant="primary">
-                    Details
-                </Button>
-            </Link>
+            <div className="d-flex justify-content-center">
+              <Link to={`/detalle/${productoObjeto.id}`}>
+                  <Button
+                    variant="warning">
+                      Details
+                  </Button>
+              </Link>
+            </div>
           </Card.Body>
 
         </Card>

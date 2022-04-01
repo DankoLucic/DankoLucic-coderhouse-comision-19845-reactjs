@@ -13,8 +13,7 @@ function ItemDetailContainer() {
    const [loading, setLoading] = useState(true);
    const {detalleId} = useParams(); 
 
-//    const URL = "https://run.mocky.io/v3/8437cdef-a302-487a-a03f-4605ad5a27c8";
-   const URL = "https://run.mocky.io/v3/167295a8-5938-4761-b7d8-be50109ef17e";
+   const URL = "https://run.mocky.io/v3/ef452949-1ef2-4d13-a638-8062f92de773";
 
 
    useEffect(() => {
@@ -26,7 +25,7 @@ function ItemDetailContainer() {
         }).then(response => {
         return response.json();
         }).then(resp => {
-            setProductos((resp.products).find((item) => item.id == detalleId));
+            setProductos((resp.products).find((item) => item.id === detalleId));
             console.log(producto);
         }).catch(err => {
         console.error("ERROR: ", err.message);  
@@ -34,7 +33,7 @@ function ItemDetailContainer() {
         setLoading(false);
         });
 
-},[])
+},[detalleId])
 
     // const task = new Promise((resolve, reject)=>{
     //     let condition = true;

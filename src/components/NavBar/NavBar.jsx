@@ -19,11 +19,11 @@ function NavBar() {
               <NavLink to="/" className="m-2">
                   Home
                 </NavLink>
-                <NavLink to="/cart" className="m-2">
-                  Cart
-                </NavLink>
                 <NavLink to="categoria/accesorio" className="m-2">
                   Accesorios
+                </NavLink>
+                <NavLink to="categoria/ropa" className="m-2">
+                  Ropa
                 </NavLink>
               </Nav>
             <CartWidget/>

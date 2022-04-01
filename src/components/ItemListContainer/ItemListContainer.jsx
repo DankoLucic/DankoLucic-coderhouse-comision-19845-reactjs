@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import ItemList from '../ItemList/ItemList';
 import { Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { fetchURL } from '../../assets/fetch';
 
 
 function ItemListContainer() {
@@ -12,20 +13,14 @@ function ItemListContainer() {
    const [loading, setLoading] = useState(true);
    const {categoriaId} = useParams(); 
 
-
-
-// const URL = "https://run.mocky.io/v3/8437cdef-a302-487a-a03f-4605ad5a27c8";
-   const URL = "https://run.mocky.io/v3/167295a8-5938-4761-b7d8-be50109ef17e";
-
-   
+   const URL = "https://run.mocky.io/v3/ef452949-1ef2-4d13-a638-8062f92de773";
 
     useEffect(() => {
 
-        
-
-        setTimeout(function(){
+        setTimeout(()=>{
 
             if(categoriaId){
+
                 fetch(URL, {
                     method: 'GET', 
                     headers:{
@@ -33,10 +28,8 @@ function ItemListContainer() {
                     }
                 }).then(response => {
                     return response.json();
-                }).then(resp => {
-                    // console.log((resp.products[1]).category);
-                    setDataObjeto((resp.products).filter((item) => item.category = categoriaId));
-                    console.log(dataObjeto);
+                }).then(resp => {  
+                    setDataObjeto((resp.products).filter((item) => item.category === categoriaId)); 
                 }).catch(err => {
                     console.error("ERROR: ", err.message);  
                 }).finally(()=> {
@@ -63,7 +56,7 @@ function ItemListContainer() {
 
             }
 
-        }, 2000);
+        }, 1000);
 
 
     }, [categoriaId])

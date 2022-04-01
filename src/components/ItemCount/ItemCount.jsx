@@ -3,9 +3,9 @@ import './ItemCount.css';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 
-export default function ItemCount() {
+export default function ItemCount({stock}) {
 
-  const stock = 10;
+  
   const [count,setCount] = useState(0);
   // const [date, setDate] = useState(Date());
 
