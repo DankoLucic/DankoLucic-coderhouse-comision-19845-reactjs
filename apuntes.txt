@@ -44,7 +44,7 @@ Atajos React
 
     si colocas rf te aparecen opciones de autocompletado de componentes (react function x ejemplo)
 
-Routing y Navegación
+Routing y Navegación - Clase 8
 
     Se debe intalar las dependencias de routing
         npm install  react-router-dom
@@ -58,4 +58,214 @@ Routing y Navegación
         Dentro se especifican los elementos que requieren una ruta especifica, propiedades path y element.
         Ej: path="/" y element= {<Componente>}
 
+
+Eventos - Clase 9
+
+    Tipo de Eventos: Automáticos o Manuales
+
+        Automático: Ejemplo Netflix, cuando te recuerda si continuas viendo.
+
+        Manual: Son todas las interacciones del usuario que producen algun tipo de respuesta o efecto secundario. (botón submit, por ejemplo).
+
+
+    El DOM tiene una serie de eventos estandar, y se dividen en varias categorías:
+
+        Dispositivo/acción: mouse, input, keyboard, wheel, focus, efecto
+
+        Custom Events: es posible definir eventos propios que disparen la información que queramos.
+
+        El evento de UI mas conocido es el click. Ej:
+
+            <button onClick={input}> Button </button>
+
+
+    Event Listener
+
+        Un Event Listener es un patrón de diseño que sirve, como su nombre lo indica, para escuchar cuando un algo ocurre en algun elemento, librería o API, y poder realizar una acción en consecuencia. Ej:
+
+            window.addEventListener("click", resizeHandler)
+            window.addEventListener("mousemove",resizeHandler)
+
+                En vez de "window" puede ir directamente un elemento.
+                Después del nombre del evento, viene una función (sin los paréntesis, porque es solo una referencia)
+
+        Revomiento un Event Listener
+
+            Es necesario removerlo, porque puedes estar creando muchas escuchas lo que puede saturar la ejecución.
+
+                return() => {
+                    console.log("desmontado");
+                    window.removeEventListener(onResize)
+                }
+
+            Removiendo Eventos
+
+                - Se des-registran con el nombre y la referencia a la función con que los registramos (no alcanza únicamente el nombre).
+
+                - Si registras manualmente un evento del DOM en tu componente de react hazlo dentro de un useEffect y asegúrate de de-registrarlo en la función de limpieza en el return del efecto.
+
+                - Recordemos: Si dejamos event listeners sin des-registrar corremos riesgos de crear leaks de memoria o registrar un evento más de una vez ( se ejecutara una vez por cada register ).    
+        
+        La idea es evitar el uso de Event Listener, porque React lo maneja de otra forma mas eficiente.
+
+
+    React y los Eventos
+
+        Synthetic Events
+
+            - Los distintos navegadores suele tener algunas variaciones en el contenido de los eventos.
+
+            - Esto haría dificil utilizarlos de manera uniforme en cada plataforma (navegador). React es consciente de ello, y nos ayuda proveyendo una abstracción. Es decir, React crea eventos sintéticos (utilizando los eventos nativos) para que nuestros eventos funcionen en todos los navegadores.
+
+            - Sirven para normalizar/estandarizar eventos entre navegadores.
+
+            - Siempre que se registre un evento via React/Jsx con onClick, no obtendré el evento nativo, sino uno sintético.
+
+            - Se destruyen al terminar la ejecución de la funcion vinculada (por performance).
+
+            - Puedo acceder al evento nativo via evt.nativeEvent.
+
+        Declarando un Eventos
+
+            import React from "react";
+            import ".style.css";
+
+            export default function App(){
+                function onClick(evt){
+                    console.log("Clicked")
+                    // Al terminar esta función el evt se destruye
+                }
+                return(
+                    <div>
+                        <button onClick={onClick}> Click-me </button>
+                    </div>
+                )
+            };
+
+            **Si necesito almanecar el valor del evento puedo guardarlo en un estado (useState). Veamos el siguiente ejemplo:
+
+                import {useState, useEffect} from 'react'
+
+                export const Input = () => {
+                    const[palabra,setPalabra] = useState ({nombre: " "})
+
+                    const inputHandler = (event) => {
+                        setPalabra({
+                            ...palabra,
+                            // spread operator, me copia el campo hasta como está ahora
+                            [event.target.name]: event.target.value
+                        })
+                    }
+                
+                return(
+                    <input onChange={inputHandler} type="text" name="nombre"/>
+                )
+                }
+
+        Cancelando el Evento
+
+            Recordando ¿Qué era el evento.preventDefault()? 
+
+                Cancela el evento si este es cancelable, sin detener el resto del funcionamiento del evento, es decir, puede ser llamado de nuevo. EJ: Puede utilizar para evitar que un texto invalido entre en un campo de formulario mediante preventDefault().
+            
+            Algunos eventos como onKeyDown son cancelables, por ejemplo:
+
+                export const Input = () => {
+
+                    const inputHandler = (event) => {
+                        event.preventDefault()
+                        console.log(event.key)
+                        //indica en consola las teclas que se presionan
+                    }
+                    
+                    return(
+                        <input onKeyDown={inputHandler} type="text" name="nombre"/>
+                    )
+                }
+                //el resultado es que el input no permite ingresar info.
+
+        Evitando la propagación
+
+            Los eventos por default se ejecutan en el elemento, y en cada uno de sus ancestros. Si esto puede traer algn efecto secundario podemos cacenlar la propagación con:
+
+                evt.stopPropagation()
+
+                **para entender esto ver el video de la clase 9 (00:43:40)
+
+        Intercambialidad
+
+            Implementando componentes de manera eficiente, podremos generar intercambiabilidad, e intercambiar funciones sin mucho esfuerzo.
+
+            Podemos generar variaciones del mismo componente, con distinto layout y el mismo comportamiento.
+
+                import{useState} from "react";
+                import {Link} from "react-router-dom";
+
+                const InputCount = () => {
+                    return(
+                        <Link to="/cart">
+                            <button> Ir al carrito</button>      
+                        <Link/>
+                    )
+                }
+
+                const ButtonCount = ({handleInter}) => {
+                    return(
+                        <button onClick={handleInter}>Agregar al Carrito</button>
+                    )
+                }
+
+                const intercambiabilidad = () => {
+                    const [inputType, setInputType] = useState("button)
+
+                    const handleInter=()=>{
+                        setInputType("input")
+                    }
+
+                    return(
+                        {
+                            InputType === "button"
+                            ?
+                                <ButtonCount handleInter={handleInter} />
+                            :
+                                <InputCount/>
+                        }
+                        
+                    )
+                }
+                export default intercambiabilidad
+
+        Orientación a Eventos
+
+            - Permite mover la lógica compleja a componentes de menos orden
+
+            - Si ambos se comportan igual, el parent no lo sabrá aunque sus implementaciones sea distintas.
+
+            - Permite que el parent se encargue del resultado final sin darle esa responsabilidad a sus children.
+
+Contexto - Clase 10
+    
+    Dado que React funcona con un flujo de datos unidireccional, la única manera de transmitir datos es vía props.
+
+    **¿Qué me renderiza un componente: cambio de estado, prop y eventos.** 
+
+    Context es un lugar en donde se pueden guardar estados y funciones globales, permitiendo entregar info. a los componentes independiente de la jerarquía de este en el flujo.
+
+    create context --> para crear
+    use context --> para usar
+    provedir --> proveedor
+
+    Declarando un contexto, podemos sacar todos los pasamanos intermedios.
+
+    Esto sabiendo del tipo de variable, que debería ser global.
+
+    Recapitulación Context
+
+        Permite compartir un valor único cross-App
+
+        Reducen el wrapper-hell (infierno de nesting)
+
+        No sólo pueden llevar values, sino cualquier tipo de fn, obj o referencia.
+
+        Toman el valor del provider mas cercano o el definido durante su declaración
 

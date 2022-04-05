@@ -3,14 +3,14 @@ import './ItemCount.css';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 
-export default function ItemCount({stock}) {
+export default function ItemCount({stock, onAdd}) {
 
   
-  const [count,setCount] = useState(0);
+  const [count,setCount] = useState(1);
   // const [date, setDate] = useState(Date());
 
   function reduceCount(){
-    if(count > 0){
+    if(count > 1){
       setCount(count-1);
     }
     else{
@@ -29,8 +29,11 @@ export default function ItemCount({stock}) {
   }
 
   function addCart(){
-    alert(`has agregado ${count} productos al carrito`);
+    onAdd(count);
+   
+   
   }
+
 
   return (
 
@@ -39,19 +42,19 @@ export default function ItemCount({stock}) {
         <div className="d-flex justify-content-center">
           <div className="d-flex align-items-center">
             <div>
-              <Button className="btn-size" variant="info" onClick={reduceCount}>Menos</Button>{''}
+              <Button className="btn-size" variant="warning" onClick={reduceCount}>Menos</Button>{''}
             </div>
             <div className="p-2">
               <label className="text-label">{count}</label>
             </div>
             <div>
-              <Button className="btn-size" variant="info" onClick={increaseCount}>Mas</Button>{''}
+              <Button className="btn-size" variant="warning" onClick={increaseCount}>Mas</Button>{''}
             </div>
           </div>
         </div>
         <div>
           <div className='d-flex m-1 justify-content-center'>
-          <Button variant="info" onClick={addCart}>Agregar al Carro</Button>{''}
+                <Button variant="warning" onClick={addCart}>Agregar al Carrito</Button>{''}
           </div>
         </div>
       </div>

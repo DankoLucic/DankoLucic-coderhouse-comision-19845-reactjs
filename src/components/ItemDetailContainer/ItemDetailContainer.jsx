@@ -63,7 +63,8 @@ function ItemDetailContainer() {
      
   return (
     <>
-        {loading
+        {
+        loading
             ? 
                 <Spinner animation="grow" />
             :
