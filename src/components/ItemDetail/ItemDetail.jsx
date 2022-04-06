@@ -13,7 +13,7 @@ function ItemDetail({producto}) {
   const onAdd = (count) => {
     setState("secondState");
     addToCart({...producto, cantidad: count});
-    alert(`has agregado ${count} productos al carrito`);
+    
     
   }
   
