@@ -25,6 +25,7 @@ Git
             git add .
             git commit -m "second commit"
             git push -u origin main
+            
 
 Install Bootstrap
 
@@ -269,3 +270,6 @@ Contexto - Clase 10
 
         Toman el valor del provider mas cercano o el definido durante su declaración
 
+Clase - Firebase
+
+    npm install firebase

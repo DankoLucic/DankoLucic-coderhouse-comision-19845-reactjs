@@ -5,6 +5,7 @@ import ItemList from '../ItemList/ItemList';
 import { Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { fetchURL } from '../../assets/fetch';
+import { getFirestoreApp } from '../../firebase/firebase';
 
 
 function ItemListContainer() {
@@ -15,6 +16,7 @@ function ItemListContainer() {
 
    const URL = "https://run.mocky.io/v3/ef452949-1ef2-4d13-a638-8062f92de773";
 
+   
     useEffect(() => {
 
         setTimeout(()=>{

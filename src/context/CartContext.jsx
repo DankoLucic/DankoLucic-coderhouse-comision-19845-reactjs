@@ -5,8 +5,10 @@ import ItemDetail from "../components/ItemDetail/ItemDetail";
 
 const CartContext = createContext()
 
-export const useCartContext = () => useContext(CartContext)
-//porqué no funciona con {}??
+export const useCartContext = () => {
+  return useContext(CartContext);
+} 
+//porqué no funciona con {}?? ¡ Gracias Pablo!
 
 
 function CartContextProvider({children}){ 
@@ -18,8 +20,8 @@ function CartContextProvider({children}){
     let index = Number(cartList.findIndex(producto => producto.id === item.id));
     console.log(index);
 
-    if(index === 0){
-
+    if(index >= 0){
+      
         if( Number(cartList[index].stock) >= ( Number(cartList[index].cantidad) + Number(item.cantidad) )){
             cartList[index].cantidad = Number(cartList[index].cantidad) + Number(item.cantidad);
             alert(`has agregado ${item.cantidad} productos al carrito`);

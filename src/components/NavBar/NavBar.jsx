@@ -25,6 +25,9 @@ function NavBar() {
                 <NavLink to="categoria/ropa" className="m-2">
                   Ropa
                 </NavLink>
+                <NavLink to="cart" className="m-2">
+                  Cart
+                </NavLink>
               </Nav>
             <CartWidget/>
             </Container>
