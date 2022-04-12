@@ -35,43 +35,21 @@ function ItemDetailContainer() {
 
 },[detalleId])
 
-    // const task = new Promise((resolve, reject)=>{
-    //     let condition = true;
-    //     if (condition) {
-    //         setTimeout(() => { 
-    //             resolve(detalleId);
-    //         },2000);
-    //     }
-    //     else{
-    //         reject("400 not found");
-    //     }
-    // });
+//RENDERING CONDICIONAL: IF CON RETURN TEMPRANO
+//vendría mejor un ternario dado que en los los engloba el mismo DIV (se ahorra lìneas de código)
+    if(loading){
+       return (
+        <div className="d-flex justify-content-center m-1">
+            <Spinner animation="grow" />
+        </div>
+       )
+    }
+    return (
+        <div className="d-flex justify-content-center m-1">
+            <ItemDetail producto = {producto}/> 
+        </div>
+    )
 
-    // useEffect(() => {
-
-    //         task
-    //         .then(resp => {
-    //             setProductos(resp);
-    //         }).catch(err => {
-    //             console.log(err);
-    //         }).finally(()=>{
-    //             setLoading(false);
-    //         });    
-
-    // },[])
-
-     
-  return (
-    <>
-        {
-        loading
-            ? 
-                <Spinner animation="grow" />
-            :
-                <ItemDetail producto = {producto}/>           
-        }  
-    </>
-  )
 }
 
 

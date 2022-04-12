@@ -12,3 +12,12 @@
 
 // } 
 
+// export default const fetchUna = 
+// fetch(URL, {
+//     method: 'GET', 
+//     headers:{
+//         "Content-Type": "application/json"
+//     }
+// });
+
+

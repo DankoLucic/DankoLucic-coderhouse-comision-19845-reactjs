@@ -1,16 +1,21 @@
-import React from 'react';
-import logo from './marca_principal.png';
+import React, { useState } from 'react';
 import './CartWidget.css';
+import { useCartContext } from '../../context/CartContext';
 
 function CartWidget() {
 
+  const { addToCart, cartList, removeToCart, getTotalPrice, getTotalItems } = useCartContext();
+
+  const totalItemsCart = getTotalItems();
+
+
+
+
     return (
 
-      <div>
-         <div>
-             <img className="img" src={logo} alt="" />
-         </div>
-      </div>
+        <>
+          {` [${totalItemsCart}]`}
+        </>
 
     );
   }

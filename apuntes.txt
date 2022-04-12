@@ -59,7 +59,6 @@ Routing y Navegación - Clase 8
         Dentro se especifican los elementos que requieren una ruta especifica, propiedades path y element.
         Ej: path="/" y element= {<Componente>}
 
-
 Eventos - Clase 9
 
     Tipo de Eventos: Automáticos o Manuales
@@ -270,6 +269,152 @@ Contexto - Clase 10
 
         Toman el valor del provider mas cercano o el definido durante su declaración
 
+Técnicas de Rendering - Clase 11
+
+    Como vimos en las primeras clases, React trabaja con un flujode reconcoliación y entiende bastante acerca de dónde y còmo ocurren los cambios en nuestra app.
+
+    A su vez mantiene una versión en virtual de la misma y recordamos eso como el virtual DOM
+
+
+    Rendering Condicional
+
+        En ciclos de render puedo decidir qué quiero hacer rendering de sólo algunos nodos de un árbol, o de otro: React maneja el asunto con comodidad.
+
+            Ejemplo: cuando cargamos los primeros elementos de la página y esperamos a que se cargue lo que está en el useEffect.
+
+                return <> {loading ? <h2>Loading</h2> : <h3>¡Cargado!</h3>}
+        
+        - Sirve para aparecer y desaparecer nodos del render.
+        - Etos eventos provocan dismounting y todos los efectos que ello conlleva
+        - Podemos usar los cleanup effect para detctra algun dismounting si no sabemos con certeza si ocurre.
+
+        Técnicas de Rendering Condicional
+
+            IF con return temprano
+
+                React renderiza el resultado del return de nuestra función y cada return se transforma en nuestro nuevo árbol de partida. Ejemplo:
+
+                    function TextComponent ({condition}){
+                        if(condition === true){
+                            return <h2>Condition is true</h2>
+                        }
+                        return <h2>Condition is false</h2>
+                    }
+            
+            Inline con fragment
+
+                tenemos un nodo base (fragment) y decidimos inline con "condition &&". Ejemplo:
+
+                    function TextComponent ({condition}){
+                        return (
+                            <>
+                            {condition && <h2>Condition is true </h2>}
+                            {!condition && <h2>Condition is false</h2>}
+                            </>
+
+                        )
+                    }
+
+            Inline ternary
+
+                Mantenemos el mismo nodo como padre y modificamos sus children, que en este caso son los textos, lo cual optimiza ya que no hay dismounts. Ejemplo:
+
+                    function TextComponent ({condition}){
+                        return <h2>{condition === true ? "Condition is true" : "Condition is false"}</h2>
+                    }
+
+    Otras Técnicas para Control Condicional
+
+        Conditional Props: Styling
+
+            El conditional rendering aplica no sólo para los nodos, sino también para sus propiedades.
+
+                function TextComponent({condition}){
+                    return( <>
+                        <h2 style = {{color: !condition ? "red" : "green"}}> Loading </h2>
+                    </>)
+                }
+            
+        Conditional Atributes: Classes
+
+            Modificar clases en base a condiciones:
+
+                function TextComponent ({condiiton}){
+                    return (<>
+                        <h2 clasName={condiiton === true ? "greenClass" : "redClass"}> Loading </h2>
+                    </>)
+                }
+
+        Conditional Atributes: Multi-Classes
+
+            Mas de una clase, se concatena poniendo backstick y OR
+
+                function TextComponente ({condition, other}){
+                    return(<>
+                        <h2 className={`${condition === true ? "redClass" : "greenClass"} ${other || ""}`}> Loading </h2>
+                        </>)
+                }
+
+                export default function App(){
+                    return <TextComponent condiiton = {true} other= "newClass"/>
+
+                    entiendo que también podría ir sin el other; si no viene definida el OR toma el "".
+
+                export default function App(){
+                    return <TextComponent condiiton = {true}/>
+                }
+
+        Conditional Props / Props dinámicas
+
+            Podemos hacer speading de propiedades de manera condicional:
+
+                funcition TextComponent({condition, other}){
+                    const config = condition ? {
+                        className: `redClass ${other || "}`,
+                        title: "Title when condition is true"
+                        } : {};
+
+                        return ( <>
+                            <h2 {...config}> Loading </h2>
+                            </>)
+                    }
+
+                export default function App(){
+                return <>
+                    <TextComponent condition={true}/>
+                    </>
+             }
+
+    Render Optimizado
+
+    Podemos ahorrar trabajo a React en el re-render cuando tenemos la ceterza de que se va a renderizar lo mismo que ya está renderizado (que no hay cambios con el render anterior).
+
+        REACT MEMO (MEMORIZATION)  
+
+            Para que no se renderice un componente dado una condición, se necesita envolver el componente en memo y definir la condición (si no se define condición, en todos los casos no hace render).
+
+            Se debe importar memo de react (import {memo} from "react").
+
+                    import {memo}from 'react'
+                    import Item from '../Item/Item'
+
+                    const ItemList = memo(
+                        ({productosObjeto}) => {
+                            return (
+                                <>
+                                {productosObjeto.map(productoObjeto => <Item key = {productoObjeto.id} productoObjeto = {productoObjeto}/>)}
+                                </>
+                            )
+                        }
+                        //condición de memo; si la condición es true no renderiza, si es distinta, renderiza.
+                    ,(oldProp, newProp)=> oldProp.productosObjeto.length === newProp.productosObjeto.length)
+
+                    export default ItemList
+
+            - Sive para ahorrar renders costosos de los cuales podamos prever el resultado en base al análisis de props.
+            - No es necesario ni recomendado usarlo en todos lados o en componentes simples.
+            - Útiles en listas largas y determinadas que se tienen un re-rendering frecuente pero que no modifica sus props.
+      
 Clase - Firebase
 
     npm install firebase

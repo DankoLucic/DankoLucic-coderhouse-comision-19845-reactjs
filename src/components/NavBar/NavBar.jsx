@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import CartWidget from '../CartWidget/CartWidget';
 import { NavLink } from 'react-router-dom';
+import logo from './marca_principal.png';
 
 
 function NavBar() {
@@ -14,11 +15,12 @@ function NavBar() {
       <div className="bodyNavBar">
           <Navbar bg="" variant="light">
             <Container>
-              <Navbar.Brand href="#home">Universidad de los Andes</Navbar.Brand>
+            <NavLink to="/" className="m-2">
+              <Navbar.Brand>
+                <img alt="" src={logo} className="img"/>{' '}
+                </Navbar.Brand>
+            </NavLink>
               <Nav className="me-auto">
-              <NavLink to="/" className="m-2">
-                  Home
-                </NavLink>
                 <NavLink to="categoria/accesorio" className="m-2">
                   Accesorios
                 </NavLink>
@@ -27,9 +29,9 @@ function NavBar() {
                 </NavLink>
                 <NavLink to="cart" className="m-2">
                   Cart
+                  <CartWidget/>
                 </NavLink>
               </Nav>
-            <CartWidget/>
             </Container>
           </Navbar>
  
