@@ -29,7 +29,7 @@ function NavBar() {
                 </NavLink>
                 <NavLink to="cart" className="m-2">
                   Cart
-                  <CartWidget/>
+                    <CartWidget/>
                 </NavLink>
               </Nav>
             </Container>

@@ -12,12 +12,22 @@ function CartWidget() {
 
 
     return (
+      <>
+        {
+          (totalItemsCart !== 0)
+          ?
+     
+              `[${totalItemsCart}]`
+     
+          :
+      
+              ""
 
-        <>
-          {` [${totalItemsCart}]`}
-        </>
+        }
+          
+     </>
+    )
 
-    );
   }
 
   export default CartWidget;

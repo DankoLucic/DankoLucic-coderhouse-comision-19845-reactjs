@@ -415,6 +415,61 @@ Técnicas de Rendering - Clase 11
             - No es necesario ni recomendado usarlo en todos lados o en componentes simples.
             - Útiles en listas largas y determinadas que se tienen un re-rendering frecuente pero que no modifica sus props.
       
-Clase - Firebase
+Clase - Firebase I
 
-    npm install firebase
+    Recapitulación de arquitecturas
+
+        Si venimos de los desarrollos clásicos, tenemos una arquitectura que es la mas conocida.
+
+        Puede estar vinculada a un patrón como el siguiente:
+
+            SPAN - consume API - para llegar a Base de datos
+
+        En muchos casos esta sigue siendo una alternativa comoda para desarollar, cuando vamos ganando experiencia en backend.
+
+            **La API decide quien accede, implementa su modelo de seguridad, y determina la respuesta.**
+        
+        Hoy las tecnologías nos permiten rearmar este esquema, para todos los desarrollos no requieren necesariamente este patron, llegando algo como lo siguiente. (este problema lo tenemos hoy nosotros porque no tenemos backend)
+
+            SPA(corre en el browser)-> Firebase service (Accede y guarda vía Firestore)
+
+            **Firestore decide quien accede mediante mecanismos propios y filtros de seguridad**
+
+        Firebase
+
+            Es un servicio provisto por Google para satisfacer las distintas necesidades que puede tener una aplicación y su ciclo de desarrollo, dentro de las cuales encontramos:
+
+                - Seguridad y autenticación
+                - Almacenamiento y consulta (la que veremos ahora)
+                - Hosting
+                - Monitoreo
+                - Functions y más
+
+        Firebase
+
+            - Es una plataforma de servicios para el desarollo de apps.
+            - Permite de manera simple y rápida crear aplicaciones ricas en contenido, interactividad y persistencia.
+            - Si bien nosotros usaremos el free-tier(spark), una vez que se excedan las cuotas podemos configurarlo para utilizar un pay "pay-as-you-go", que cobra de acuerdo al consumo.
+            - No requerimos extensos conocimientos de infraestructura o mantenimiento, para poder tener nuestra app escalable.
+
+        FireStore : Creando el primero documento
+
+            - Crea los campos que contengan la información para los items de tu ItemList alojada en "/".
+
+            - Puedes autogenerar, asi que no es necesario que crees un campo especifico id, y usar el provisto por firestore da beneficios de tolerancia a alta concurrencia
+
+
+        Instalando Firebase : Check list para conectar nuestra React-App
+
+            - Te has registrado en Firebase
+            - Has creado un nuevo proyecto
+            - Creación de un FireStore
+            - Inicialización de la primera colección (items o productos).
+            - Creaste tu primer item en la colección (documento)
+            - Instalar firebase en el proyecto via NPM (npm install firebase)
+            - Configurar tu integración con una webapp
+            - Configurar el cliente con tu API KEY
+            - Configurar un client factory
+
+            npm install firebase
+
